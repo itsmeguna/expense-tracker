@@ -1,0 +1,126 @@
+Folder Setup in VS Code 
+expense-tracker/
+├── app/
+│   ├── __init__.py            # Make app a package
+│   ├── main.py                # Entry point for FastAPI app
+│   ├── models.py              # SQLAlchemy models
+│   ├── schemas.py             # Pydantic schemas
+│   ├── database.py            # PostgreSQL connection setup
+│   ├── crud.py                # Business logic (optional early)
+│   └── routes/
+│       ├── __pycache__       
+│       └── expenses.py        # All /expenses endpoints
+│       ├── balance.py         # All /balance endpoints
+│       └── income.py          # All /income endpoints
+│       └── savings.py         # All /savings endpoints
+│       ├── summary.py         # All /summary endpoints
+├── requirements.txt           # Project dependencies
+
+
+
+1.mkdir expense_tracker
+cd expense_tracker
+python -m venv venv
+venv\Scripts\activate       # Windows: venv\Scripts\activate
+mkdir app
+3.New-Item requirements.txt -ItemType File
+New-Item app\__init__.py -ItemType File
+New-Item app\main.py -ItemType File
+New-Item app\models.py -ItemType File
+New-Item app\schemas.py -ItemType File
+New-Item app\database.py -ItemType File
+New-Item app\crud.py -ItemType File
+New-Item app\routes.py -ItemType File
+
+uvicorn app.main:app --reload
+
+
+🔹 1. Expense CRUD Functionality
+Feature	Status
+✅ Add expense (POST)	Done
+✅ Get all expenses (GET)	Done
+✅ Get expenses by date range	Done
+✅ Get expense by ID (GET)	Done
+✅ Get expenses by category with sum	✅ Done
+✅ Update expense (PUT)	Done
+✅ Delete expense (DELETE)	Done
+✅ Get monthly grouped summary	✅ Done
+
+🔹 2. Income & Savings
+Feature	Status
+✅ Add income	Done
+✅ Balance	Done
+✅ Add savings	Done
+
+🔹 3. Database
+Concern	Status
+✅ Using PostgreSQL	Done
+⚠️ Migrations (e.g., Alembic)	Not done ye-->(Later)
+➕ Model improvement for user_id	Future enhancement (multi-user)-->ToDo 
+
+🔹 4. Frontend
+Component	Status
+✅ Swagger Docs	Available
+✅ API-only usage	Yes
+
+🔹 5. Authentication
+Question	Status
+✅ Login planned?	Yes (future)-- to do
+
+🔹 6. Summary/Reports
+Feature	Status
+✅ Show total per category	Done
+✅ Monthly grouping summary	Done
+💡 Charts (pie/bar)	Idea —  later
+➕ Multi-month summary view	✅ Done (via GET by month list)
+
+🔹 7. Dockerization & Testing
+Task	Status
+🔲 Dockerize app	yet To do
+🔲 Write tests	yet To do (start with basic route tests)
+
+
+
+🔹 1. Expense CRUD Functionality with auth
+Add expense (POST) ---> done
+Get all expenses (GET)----> done
+Get expenses by date range---> done
+Get expense by ID (GET)----> done
+Update expense (PUT)---> done
+Delete expense (DELETE)---> done
+Get monthly grouped summary-- done
+Get expenses by category with sum --> done
+
+
+🔹 2. Income & Savings
+Add income--->done
+Balance (income - expense - saving)--->done
+Add savings----> done
+
+🔹 3. Database
+Using PostgreSQL-->done
+
+🔹 4. Frontend
+Swagger Docs (OpenAPI)
+API-only usage
+
+🔹 6. Summary/Reports
+Show total per category--->done
+Monthly grouping summary--> done
+Multi-month summary view--->done
+
+🟡 TO DO / YET TO DO
+🔹 3. Database
+Add user_id field (for multi-user support)---> done
+
+🔹 5. Authentication
+Add login system (basic auth or JWT)---> done
+
+🔹 7. Dockerization & Testing
+Dockerize the app
+Write tests (start with route-level tests)
+
+⏳ LATER / FUTURE ENHANCEMENTS
+Add migrations using Alembic---> done
+Charts (pie/bar) for visual reports
+Multi-user support (backend model updates, auth linking)
