@@ -26,4 +26,4 @@ jobs:
             --targets "Key=instanceIds,Values=${{ secrets.EC2_INSTANCE_ID }}" \
             --document-name "AWS-RunShellScript" \
             --comment "Deploy backend" \
-            --parameters 'commands=["cd /home/ubuntu/smart-library && git pull origin dev && docker compose up -d --build"]'
+            --parameters 'commands=["cd /home/ubuntu/smart-library && git pull origin main && docker compose up -d --build"]'
