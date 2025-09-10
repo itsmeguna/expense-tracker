@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@3fa5b7e24e8e6c5fba33b5a4c0edb3a2b3a8f2f4
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
 
       - name: Set up AWS credentials
-        uses: aws-actions/configure-aws-credentials@4fc4975
+        uses: aws-actions/configure-aws-credentials@5fd3084fc36e372ff1fff382a39b10d03659f355
         with:
           role-to-assume: arn:aws:iam::379383214331:user/github-actions-deployer
           aws-region: us-east-1
