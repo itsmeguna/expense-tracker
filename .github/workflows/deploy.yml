@@ -26,4 +26,5 @@ jobs:
             --targets "Key=instanceIds,Values=${{ secrets.EC2_INSTANCE_ID }}" \
             --document-name "AWS-RunShellScript" \
             --comment "Deploy backend" \
-            --parameters 'commands=["cd /home/ubuntu/app && git pull origin main && docker compose down && docker compose up -d --build"]'
+            --parameters 'commands=[
+                                   "cd /home/ubuntu","if [ ! -d app ]; then git clone -b dev https://github.com/itsmeguna/expense-tracker.git app; fi","cd app","docker compose down","docker compose up -d --build"]'
