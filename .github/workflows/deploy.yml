@@ -18,7 +18,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy via SSM
         run: |
@@ -27,4 +27,11 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --comment "Deploy backend" \
             --parameters 'commands=[
-                                   "cd /home/ubuntu","if [ ! -d app ]; then git clone -b dev https://github.com/itsmeguna/expense-tracker.git app; fi","cd app","docker compose down","docker compose up -d --build"]'
+              "cd /home/ubuntu",
+              "if [ ! -d expense-tracker ]; then git clone -b main https://github.com/itsmeguna/expense-tracker.git; fi",
+              "cd expense-tracker",
+              "git reset --hard",
+              "git pull origin dev",
+              "sudo docker compose down",
+              "sudo docker compose up -d --build"
+            ]'
