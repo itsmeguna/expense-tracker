@@ -35,7 +35,7 @@ app.add_middleware(
 
 while True:
     try:
-        conn= psycopg2.connect(host="localhost",database="FASTAPI", user="postgres", password="FF66fK0=", cursor_factory=RealDictCursor) #connect to the PostgreSQL database    
+        conn= psycopg2.connect(host="db",database="FASTAPI", user="postgres", password="FF66fK0=", cursor_factory=RealDictCursor) #connect to the PostgreSQL database    
         cursor= conn.cursor() #create a cursor to execute SQL queries
         print("Connection to database successful")
         break

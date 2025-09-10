@@ -15,7 +15,8 @@ expense-tracker/
 │       └── savings.py         # All /savings endpoints
 │       ├── summary.py         # All /summary endpoints
 ├── requirements.txt           # Project dependencies
-
+├── Dockerfile                 # Dockerfile
+├── docker-compose.yml         # Docker compose file
 
 
 1.mkdir expense_tracker
@@ -33,6 +34,23 @@ New-Item app\crud.py -ItemType File
 New-Item app\routes.py -ItemType File
 
 uvicorn app.main:app --reload
+git init  
+git remote add origin https://github.com/itsmeguna/expense-tracker.git     
+git add .   
+git status                                                                                                          
+git commit -m "Backup before dockerization" 
+git branch -M main 
+git push -u origin main 
+git pull --rebase origin main 
+git push -u origin main                                      
+
+pip list
+docker build -t fastapi-expense-app .
+docker run -d -p 8000:8000 fastapi-expense-app
+
+docker-compose down --volumes
+docker-compose up --build
+docker rm -f fastapi_expense_app
 
 
 🔹 1. Expense CRUD Functionality
@@ -79,48 +97,89 @@ Task	Status
 🔲 Dockerize app	yet To do
 🔲 Write tests	yet To do (start with basic route tests)
 
+{
+    "email": "user1@example.com",
+    "password": "test1243"
+}
+
+start_date=2025-07-01&end_date=2025-07-30
 
 
-🔹 1. Expense CRUD Functionality with auth
-Add expense (POST) ---> done
-Get all expenses (GET)----> done
-Get expenses by date range---> done
-Get expense by ID (GET)----> done
-Update expense (PUT)---> done
-Delete expense (DELETE)---> done
-Get monthly grouped summary-- done
-Get expenses by category with sum --> done
+
+Here is a concise overview of how OOP (Object-Oriented Programming) concepts are applied in my
+FastAPI Expense Tracker project, tailored for my demo:
+
+✅ 1. Encapsulation
+Encapsulation is about bundling data (attributes) and methods (functions) into
+single units (classes) and restricting direct access.
+
+In your code:
+
+models.py encapsulates DB table structures using SQLAlchemy models.
+class Expense(Base):
+    __tablename__ = "expenses"
+    id = Column(Integer, primary_key=True, index=True)
+    category = Column(String, nullable=False)
+    amount = Column(Float, nullable=False)
+    note = Column(String)
+
+routes/expenses.py encapsulates logic for creating, updating, deleting expenses.
+schemas.py defines request and response models (Pydantic) to encapsulate data validation logic.
+
+✅ 2. Abstraction
+Abstraction hides complex logic behind simple interfaces.
+
+In your code:
+
+You expose simple API endpoints (POST /expenses, GET /summary) while hiding:
+
+JWT auth logic
+
+SQL queries
+
+Database transactions
+
+The frontend (or API client) doesn’t need to know how data is stored or validated—it just
+consumes the abstracted endpoints.
+
+✅ 3. Inheritance
+Inheritance allows classes to reuse logic from base classes.
+
+In your code:
+
+All models inherit from Base (Base = declarative_base() from SQLAlchemy).
+
+python
+
+class Expense(Base):
+    ...
+This gives them SQLAlchemys ORM capabilities (e.g., table mapping, metadata).
+
+✅ 4. Polymorphism
+Polymorphism lets the same method name behave differently depending on the context.
+
+In your code:
+
+You might have get_summary() in multiple routes (e.g., expenses, income) that return different
+results based on the data.
+
+Similarly, methods like create(), update() behave differently for each model (Expense, 
+Income, Savings), but share the same interface pattern.
+
+🎯 Bonus Points You Can Mention
+Single Responsibility: Your modules (e.g., auth.py, summary.py) each do one thing—this is good 
+OOP design.
+
+Reusability: Models, schemas, and shared utils (e.g., DB session, JWT logic) are reusable across
+the project.
+
+If you’re asked "How did you apply OOP principles?", answer:
+
+"I used encapsulation to separate database, logic, and validation layers; abstraction to hide DB
+and auth complexities behind API endpoints; inheritance via SQLAlchemy models; and polymorphism 
+through route behaviors that share interfaces but differ in implementation."
 
 
-🔹 2. Income & Savings
-Add income--->done
-Balance (income - expense - saving)--->done
-Add savings----> done
 
-🔹 3. Database
-Using PostgreSQL-->done
 
-🔹 4. Frontend
-Swagger Docs (OpenAPI)
-API-only usage
 
-🔹 6. Summary/Reports
-Show total per category--->done
-Monthly grouping summary--> done
-Multi-month summary view--->done
-
-🟡 TO DO / YET TO DO
-🔹 3. Database
-Add user_id field (for multi-user support)---> done
-
-🔹 5. Authentication
-Add login system (basic auth or JWT)---> done
-
-🔹 7. Dockerization & Testing
-Dockerize the app
-Write tests (start with route-level tests)
-
-⏳ LATER / FUTURE ENHANCEMENTS
-Add migrations using Alembic---> done
-Charts (pie/bar) for visual reports
-Multi-user support (backend model updates, auth linking)
