@@ -1,0 +1,52 @@
+# Byte-compiled / cache
+
+**pycache**/
+_.py[cod]
+_.pyo
+/_.pyc
+_.pyc
+
+# Virtual environment
+
+venv/
+env/
+ENV/
+
+# VSCode or PyCharm config
+
+.vscode/
+.idea/
+
+# Python egg
+
+\*.egg-info/
+dist/
+build/
+
+# Environment variables / secrets
+
+.env
+\*.env
+
+# SQLite DB or local dev DBs (if used)
+
+\*.db
+
+# Alembic
+
+alembic/versions/\*.pyc
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Alembic
+
+alembic/**pycache**/
+alembic/\*.pyc
+
+alembic/versions/\*.py.
+notes
+
+**pycache**/
